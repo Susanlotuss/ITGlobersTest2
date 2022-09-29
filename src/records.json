@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "title": "Home",
+        "content": "Content here",
+        "path": "/"
+    },
+    {
+        "id": 2,
+        "title": "Adoptions",
+        "content": "Content here",
+        "path": "Adoption"
+    },
+    {
+        "id": 3,
+        "title": "Donations",
+        "content": "Content here",
+        "path": "Donation"
+    },
+    {
+        "id": 4,
+        "title": "Contact Us",
+        "content": "Content here",
+        "path": "ContactMe"
+    }
+]
