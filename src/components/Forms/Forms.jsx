@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Format from "./Format";
 
 const Forms = () => {
-  const [data, setData] = useState({
+  const initialStateValue = {
     nombre: "",
     email: "",
     celular: "",
     edad: "",
-  });
+  };
+
+  const [data, setData] = useState(initialStateValue);
+
+  const [dataErrors, setDataErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const handleInputChange = (e) => {
     //console.log(e.target.value);
@@ -18,55 +24,56 @@ const Forms = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(data.nombre + ' ' + data.email + ' ' + data.celular + ' ' + data.edad)
-    alert("El formulario se ha enviado");
+    setDataErrors(validate(data));
+    setIsSubmit(true);
+
+    e.target.reset();
+  };
+
+  useEffect(() => {
+    if (Object.keys(dataErrors).length === 0 && isSubmit) {
+      console.log(data);
+    }
+  }, [data, dataErrors, isSubmit]);
+
+  const validate = (values) => {
+    let regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    let errors = {};
+
+    if (!values.nombre) {
+      errors.nombre = "Username is required!";
+    }
+    if (!values.email) {
+      errors.email = "Email is required!";
+    } else if (!regex.test(values.email)) {
+      errors.email = "This is not a valid email format!";
+    }
+    if (!values.celular) {
+      errors.celular = "cellphone is required";
+    } else if (values.celular.length < 10) {
+      errors.celular = "Cellphone must be 10 characters";
+    } else if (values.celular.length > 10) {
+      errors.celular = "Cellphone cannot exceed more than 10 characters";
+    }
+
+    if (!values.edad) {
+      errors.edad = "Age is required";
+    } else if (values.edad.length < 0) {
+      errors.edad = "Age must be more than 0 characters";
+    } else if (values.edad.length > 3) {
+      errors.edad = "Age cannot exceed more than 3 characters";
+    }
+    return errors;
   };
 
   return (
     <>
-      <form className="row" onSubmit={handleSubmit}>
-        <div className="col-md-3">
-          <input
-            placeholder="Ingrese su nombre"
-            className="form-control"
-            type="text"
-            name="nombre"
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="col-md-3">
-          <input
-            placeholder="Ingrese su email"
-            className="form-control"
-            type="text"
-            name="email"
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="col-md-3">
-          <input
-            placeholder="Ingrese su celular"
-            className="form-control"
-            type="text"
-            name="celular"
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="col-md-3">
-          <input
-            placeholder="Ingrese su edad"
-            className="form-control"
-            type="text"
-            name="edad"
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="col-md-3">
-          <button className="btn btn-primary" type="submit">
-            Send
-          </button>
-        </div>
-      </form>
+        <Format
+          dataErrors={dataErrors}
+          isSubmit={isSubmit}
+          handleSubmit={handleSubmit}
+          handleInputChange={handleInputChange}
+        />
     </>
   );
 };

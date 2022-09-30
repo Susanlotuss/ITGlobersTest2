@@ -17,7 +17,8 @@ ul {
   background-color: #e6e6fa;
 }
 
-h1, h3 {
+h1,
+h3 {
   position: absolute;
   top: 7rem;
   padding: 3rem;
@@ -29,7 +30,6 @@ h1, h3 {
 }
 
 div {
-  display: flex;
   background-color: #e6e6fa;
 }
 
@@ -38,17 +38,103 @@ div {
   margin-right: auto;
   left: 0;
   right: 0;
+  item-align: center;
+}
+
+p {
+  color: red;
+}
+
+.fade-in {
+  transition: opacity 1s ease;
+  position: absolute;
+  top: 16rem;
+  padding: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
   text-align: center;
+  background-color: pink;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease;
+  position: absolute;
+  top: 16rem;
+  padding: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background-color: pink;
 }
 
 @media (min-width: 921px) {
-  .box {
-    display: inline-block;
+  .row {
+    position: absolute;
+    top: 23rem;
+    right: 0;
+    left: 0;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .form-control {
+    margin: 12px;
+    padding: 18px;
+    text-align: center;
+    background-color: whitesmoke;
+  }
+
+  div {
+    display: flex;
+    justify-content: center;
   }
 }
 
 @media (max-width: 920px) {
   .box {
     background-color: black;
+  }
+  div {
+    display: block;
+  }
+
+  h1 {
+    top: 16rem;
+  }
+
+  h3 {
+    top: 20rem;
+  }
+
+  .homie {
+    top: 10rem;
+  }
+
+  .row {
+    position: absolute;
+    top: 35rem;
+    right: 0;
+    left: 0;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .form-control {
+    margin: 12px;
+    padding: 18px;
+    text-align: center;
+    background-color: whitesmoke;
+  }
+
+  .fade-in,
+  .fade-out {
+    top: 30rem;
   }
 }

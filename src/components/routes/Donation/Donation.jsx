@@ -1,6 +1,16 @@
+import Forms from '../../Forms/Forms';
+
 function Donation() {
     return (
-        <h1>Donate</h1>
+        <>
+      <div>
+        <h1>
+          Do you want to contribute <br /> with the Birdie Sanctuary?
+        </h1>
+        <h3 style={{ marginTop: "8rem" }}>Please fill the form</h3>
+      </div>
+      <Forms />
+    </>
     )
 }
 
