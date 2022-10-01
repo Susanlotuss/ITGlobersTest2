@@ -37,8 +37,8 @@ const Forms = () => {
   }, [data, dataErrors, isSubmit]);
 
   const validate = (values) => {
-    let regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    let errors = {};
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    const errors = {};
 
     if (!values.nombre) {
       errors.nombre = "Username is required!";
@@ -55,25 +55,24 @@ const Forms = () => {
     } else if (values.celular.length > 10) {
       errors.celular = "Cellphone cannot exceed more than 10 characters";
     }
-
     if (!values.edad) {
       errors.edad = "Age is required";
-    } else if (values.edad.length < 0) {
-      errors.edad = "Age must be more than 0 characters";
-    } else if (values.edad.length > 3) {
-      errors.edad = "Age cannot exceed more than 3 characters";
+    } else if (values.edad < 18) {
+      errors.edad = "You must be over 18 years old";
+    } else if (values.edad > 100) {
+      errors.edad = "You must be under 100 years old";
     }
     return errors;
   };
 
   return (
     <>
-        <Format
-          dataErrors={dataErrors}
-          isSubmit={isSubmit}
-          handleSubmit={handleSubmit}
-          handleInputChange={handleInputChange}
-        />
+      <Format
+        dataErrors={dataErrors}
+        isSubmit={isSubmit}
+        handleSubmit={handleSubmit}
+        handleInputChange={handleInputChange}
+      />
     </>
   );
 };
